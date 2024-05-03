@@ -23,10 +23,10 @@ email: alaindacc@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Sharing my insights on AI and its applications in finance, 
   supply chain, and marketing, from my four years of experience 
-  in the field
+  in the field.
 
-# host: 0.0.0.0
-# port: 5000
+host: 0.0.0.0
+port: 5000
 
 markdown: kramdown
 baseurl: "" # the subpath of your site, e.g. /blog

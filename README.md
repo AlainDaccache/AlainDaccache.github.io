@@ -1,5 +1,9 @@
 # AlainDaccache.github.io
 
+```
+cd docs
+```
+
 On Command Prompt (Windows): wsl hostname -I
 
 Exposed 0.0.0.0 as host in config.
