@@ -2,7 +2,7 @@
 layout: post
 title:  "Building your AI Ecosystem Part 0: Motivation"
 date:   2024-05-02 09:10:02 -0400
-categories: 
+categories: ai-ecosystem
 ---
 
 ## Motivation for this project
