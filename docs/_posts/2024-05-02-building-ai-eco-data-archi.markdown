@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Building your AI Ecosystem Part I: Data Architecture"
+title:  "Building your AI Ecosystem Part I: Data Architecture, Pipelines, and Dimensional Modelling"
 date:   2024-05-02 11:10:02 -0400
 categories: ai-ecosystem
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Building your AI Ecosystem Part 0: Motivation"
+title:  "Building your AI Ecosystem Part Ø: Motivation"
 date:   2024-05-02 09:10:02 -0400
 categories: ai-ecosystem
 ---

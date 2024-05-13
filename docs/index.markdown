@@ -3,7 +3,7 @@ layout: home
 title: Home
 ---
 
-## 👋 Welcome to Chaotic Quant!
+## 👋 Welcome to the Chaotic Quant!
 
 I'm Alain Daccache, and this is where I will document my journey in the domain of Artificial Intelligence. 
 
