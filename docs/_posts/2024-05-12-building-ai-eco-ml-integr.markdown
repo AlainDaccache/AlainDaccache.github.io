@@ -79,7 +79,6 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# CMD ["python", "-m", "main"]
 CMD ["/bin/bash"]
 ```
 
@@ -197,7 +196,7 @@ with open(f"{best_model_key}.dill", "wb") as fp:
 
 In this project however, we simply need retrieve the weights of our embedding model and LLM from `HuggingFace`.
 
-* Step 4. Produce the Artifacts: we searialize the model by converting the model object (which includes the weights and hyper-parameters) into bytes. We encapsulate the logic of model de-serialization, loading, data validation, and inference. We take all this, in addition to the model dependencies, and register them. All this is so that we can easily make use of the model during inference. Those will be stored as artifacts in our data lake.
+* Step 4. Produce the Artifacts: we serialize the model by converting the model object (which includes the weights and hyper-parameters) into bytes. We encapsulate the logic of model de-serialization, loading, data validation, and inference. We take all this, in addition to the model dependencies, and register them. All this is so that we can easily make use of the model during inference. Those will be stored as artifacts in our data lake.
 
 We are leveraging a popular MLOps tool called `MLFlow` that will help us do that, and abstracts the logic of the final steps quite seamlessly:
 ```
@@ -234,7 +233,7 @@ As we can see, in this way we can track experiments as well as the models to be 
 
 ## Model Consumption
 
-In the final section, we will see how we can actually make use of those models as an end product. Typically, the models could be utilized in two ways: real-time or batch
+In the final section, we will see how we can actually make use of those models as an end product. Typically, the models could be utilized in two ways: real-time or batch.
 
 ### Batch Mode
 
@@ -265,9 +264,9 @@ app = FastAPI()
 # Set up callback manager
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 # Load embedding model
-embedding_model = EmbeddingLoader().load_from_local(model_name=EMBEDDING_MODEL_NAME)
+embedding_model = EmbeddingLoader().load_from_mlflow(model_name=EMBEDDING_MODEL_NAME)
 # Load LLMLoader
-qa = LLMLoader().load_from_local(
+qa = LLMLoader().load_from_mlflow(
     embedding_model=embedding_model,
     chroma_host=CHROMA_DB_HOST,
     chroma_port=CHROMA_DB_PORT,
@@ -293,10 +292,10 @@ async def answer(question: str):
     res = qa(question)
     answer, docs = res["result"], res["source_documents"]
     if len(docs):
-        s = "\nHere are the relevant sources for this information:\n"
+        s = "\n\nHere are the relevant sources for this information:\n"
         unique_sources = list(set([doc.metadata["source"] for doc in docs]))
         for i, doc in enumerate(unique_sources):
-            s += f"{i + 1}. {doc}\n"
+            s += f"• {doc}\n"
 
         answer = f"{answer}{s}"
 
@@ -307,7 +306,6 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=6060)
-
 ```
 
 We can then interact with our chatbot:
